@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 const servicesData = [
   {
@@ -10,6 +11,7 @@ const servicesData = [
     description:
       "Our UX Development focuses on crafting exceptional digital experiences. By prioritizing your users' needs, we build intuitive interfaces and seamless journeys that boost satisfaction, engagement, and loyalty.",
     btnText: "Benefits With Our Service",
+    href: "/services/ui-ux-design",
   },
   {
     id: "webdesign",
@@ -17,39 +19,44 @@ const servicesData = [
     subtitle: "Stunning responsive web designs and layouts.",
     description:
       "We design modern, responsive, and visually compelling websites that elevate your brand identity and engage visitors with seamless user journeys.",
-    btnText: "Explore Web Design Features",
+    btnText: "Benefits With Our Service",
+    href: "/services/web-design",
   },
   {
     id: "webdev",
     title: "Web Development",
     subtitle: "High-performance full-stack web applications.",
     description:
-      "Engineered with Next.js, TypeScript, and cloud APIs to deliver blazingly fast load times, enterprise security, and seamless scalability.",
-    btnText: "Explore Web Development",
+      "Ensuring your website is expertly developed not only creates a strong first impression but also keeps visitors engaged. Our web development services focus on building fast, responsive, and user-friendly websites.",
+    btnText: "Benefits With Our Service",
+    href: "/services/web-development",
   },
   {
     id: "appdev",
     title: "App Development",
     subtitle: "Native iOS & Android mobile applications.",
     description:
-      "Custom mobile app solutions for iOS & Android built with React Native and Flutter for high speed, offline capabilities, and delightful touch UX.",
-    btnText: "Explore App Development",
+      "Ensuring your application is expertly developed creates a seamless user experience and scales your business. Our app development services focus on building secure, robust, and intuitive native and cross-platform mobile apps.",
+    btnText: "Benefits With Our Service",
+    href: "/services/app-development",
   },
   {
     id: "digital",
     title: "Digital Marketing",
     subtitle: "Data-driven SEO, PPC, and brand strategy.",
     description:
-      "Drive targeted traffic, optimize conversion funnels, and scale your digital presence with performance marketing and search engine strategies.",
-    btnText: "Explore Digital Marketing",
+      "We focus on transforming marketing investments into business drivers. Our work combines agile strategy and execution with smart, data-driven SEO, social media, email campaigns, and PPC insights.",
+    btnText: "Benefits With Our Service",
+    href: "/services/digital-marketing",
   },
   {
     id: "database",
     title: "Database Analysis",
     subtitle: "SQL, NoSQL & Big Data Architecture.",
     description:
-      "Architecting robust database pipelines, query optimization, data warehouse warehousing, and real-time analytics dashboards.",
-    btnText: "Explore Database Services",
+      "Effective database analysis is key to making smarter, data-driven business decisions. We optimize your database structure to enhance reliability, speed, security, and scalability.",
+    btnText: "Benefits With Our Service",
+    href: "/services/database-analysis",
   },
 ];
 
@@ -71,23 +78,25 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Category Pills Bar (Responsive Horizontal Scroll on Mobile) */}
-        <div className="flex flex-nowrap lg:flex-wrap items-center gap-2.5 sm:gap-3 mb-6 sm:mb-8 overflow-x-auto py-1 max-w-full justify-start lg:justify-center no-scrollbar">
+        {/* Category Pills Bar (White border follows whichever button the cursor moves to) */}
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-10 py-3 px-2 max-w-5xl mx-auto overflow-visible">
           {servicesData.map((tab, idx) => {
             const isActive = activeTab === idx;
             return (
-              <button
+              <Link
                 key={tab.id}
+                href={tab.href || "/services/web-design"}
+                onMouseEnter={() => setActiveTab(idx)}
                 onClick={() => setActiveTab(idx)}
                 style={{ borderRadius: "9999px" }}
-                className={`px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold transition-all duration-300 border-0 cursor-pointer shrink-0 ${
+                className={`relative px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-bold cursor-pointer shrink-0 text-decoration-none select-none transition-all duration-200 ease-out transform ${
                   isActive
-                    ? "bg-[#072444] text-white border border-white/60 shadow-lg ring-2 ring-white/20"
-                    : "bg-white text-slate-900 hover:bg-slate-100 shadow-sm"
+                    ? "bg-[#072444] text-white border-2 border-white shadow-[0_8px_22px_rgba(0,0,0,0.5)] -translate-y-0.5 scale-105"
+                    : "bg-[#072444] text-white/80 border-2 border-transparent hover:text-white hover:-translate-y-0.5 shadow-md"
                 }`}
               >
                 {tab.title}
-              </button>
+              </Link>
             );
           })}
         </div>
@@ -110,18 +119,19 @@ export default function Services() {
 
                 {/* Benefits Pill Button */}
                 <div className="pt-2">
-                  <button
+                  <Link
+                    href={currentService.href || "/services/ui-ux-design"}
                     style={{ borderRadius: "9999px" }}
-                    className="inline-flex items-center justify-between gap-3 px-5 sm:px-6 py-2 sm:py-2.5 bg-transparent border border-white/80 text-white hover:bg-white/10 transition-all cursor-pointer shadow-md text-xs sm:text-sm font-semibold max-w-full"
+                    className="inline-flex items-center justify-between gap-3 px-5 sm:px-6 py-2 sm:py-2.5 bg-transparent border border-white/80 text-white hover:bg-white/10 hover:border-white transition-all cursor-pointer shadow-md text-xs sm:text-sm font-semibold max-w-full text-decoration-none group"
                   >
                     <span className="truncate">{currentService.btnText}</span>
                     <span
                       style={{ borderRadius: "9999px" }}
-                      className="w-6 sm:w-7 h-6 sm:h-7 bg-white text-[#0A417A] inline-flex items-center justify-center font-extrabold text-xs sm:text-sm shrink-0"
+                      className="w-6 sm:w-7 h-6 sm:h-7 bg-white text-[#0A417A] inline-flex items-center justify-center font-extrabold text-xs sm:text-sm shrink-0 group-hover:translate-x-0.5 transition-transform"
                     >
                       →
                     </span>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
